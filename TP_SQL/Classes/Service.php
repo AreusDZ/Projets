@@ -8,7 +8,7 @@ class Service {
 
 
     public function getNoServ() : int{
-        return $this->service;
+        return $this->noServ;
     }
 
     public function setNoServ(int $newNoServ): self{
