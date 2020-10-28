@@ -2,30 +2,38 @@
 
 class Batiment {
 
-    private $addresse;
+    private $adresse;
     private $superficie;
+
+    public function __construct(string $adresse)
+    {
+
+        $this->adresse = $adresse;
+      
+        
+    }
 
 
     public function getAddresse():string
     {
-        return $this->addresse;
+        return $this->adresse;
     }
 
-    public function setAddresse($addresse):string
+    public function setAddresse(string $adresse):self
     {
-        $this->addresse = $addresse;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
 
-    public function getSuperficie()
+    public function getSuperficie():int
     {
         return $this->superficie;
     }
 
     
-    public function setSuperficie($superficie)
+    public function setSuperficie(int $superficie):self
     {
         $this->superficie = $superficie;
 
@@ -33,7 +41,7 @@ class Batiment {
     }
     public function __toString() :string
     {
-        return " [addresse] :" . $this->addresse . 
+        return " [adresse] :" . $this->adresse . 
         " [superficie] :" . $this->superficie;
     }
 }
