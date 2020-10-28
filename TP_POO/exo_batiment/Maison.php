@@ -9,8 +9,8 @@ class Maison extends Batiment {
     public function __construct(string $adresse, int $superficie, int $nbPieces)
     {
 
-        $this->adresse = $adresse;
-        $this->superficie = $superficie;
+        parent::__construct($adresse);         // Appeler les attributs du constructeur parent
+        $this->setSuperficie($superficie);  // car ils sont en "private" donc on récupère le set ou on les mets en "protected"
         $this->nbPieces = $nbPieces;
  
     }
@@ -29,7 +29,6 @@ class Maison extends Batiment {
 
     public function __toString() :string
     {
-        return " [nbPieces] :" . $this->nbPieces . " [adresse] :" . $this->adresse . 
-        " [superficie] :" . $this->superficie ."m2";
+        return " [nbPieces] :" . $this->nbPieces . parent::__toString();  // car ils sont en "private" donc on récupère lea fonction toString de la classe parent  
     }
 }

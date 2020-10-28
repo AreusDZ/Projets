@@ -14,12 +14,12 @@ class Batiment {
     }
 
 
-    public function getAddresse():string
+    public function getAdresse():string
     {
         return $this->adresse;
     }
 
-    public function setAddresse(string $adresse):self
+    public function setAdresse(string $adresse):self
     {
         $this->adresse = $adresse;
 
@@ -42,6 +42,6 @@ class Batiment {
     public function __toString() :string
     {
         return " [adresse] :" . $this->adresse . 
-        " [superficie] :" . $this->superficie;
+        " [superficie] :" . $this->superficie ."m2";
     }
 }
