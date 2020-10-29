@@ -1,12 +1,15 @@
 <?php
 
-class Personne {
+abstract class Personne {
     protected $id;
     protected $prenom;
     protected $nom;
     protected $mail;
     protected $telephone;
     protected $salaire;
+    public static $counter;
+
+    
 
     public function __construct(int $id, string $prenom, string $nom, string $mail, 
                                 string $telephone, float $salaire){
@@ -16,13 +19,11 @@ class Personne {
         $this->mail = $mail;
         $this->telephone = $telephone;
         $this->salaire = $salaire;
-
+        self::$counter++; 
     }
 
-    public function calculerSalaire() :float { 
-        return $this->salaire;
-    }
-
+    public abstract function calculerSalaire();
+    
     public function affiche() : void {
         echo $this;
     }
