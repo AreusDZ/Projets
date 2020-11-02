@@ -1,30 +1,17 @@
 <?php
 
-include_once("Profil.php");
-include_once("Personne.php");
-include_once("Utilisateur.php");
 include_once("Developpeur.php");
 include_once("Manager.php");
 
-$profilMN = new Profil(1, "MN", "Manager");
-$profilDG = new Profil(2, "DG", "Directeur Général");
-$profilCP = new Profil(3, "CP", "Chef de Projet");
+$dev1 = new Developpeur(1, "A", "B", "a.@g.c", "01011111111", 120.3, "Backend");
+$dev2 = new Developpeur(2, "AA", "BB", "aa.@g.c", "01011122211", 1220.3, "Frontend");
+$dev3 = new Developpeur(3, "AAA", "BBB", "aaa.@g.c", "01011133311", 1320.3, "Fullstack");
+echo "Nombre de personnes créées : " . Developpeur::$counter . "\n";
+$man1 = new Manager(4, "B", "C", "c.@g.c", "01011111111", 1200.3, "Bichimie");
+$man2 = new Manager(5, "BB", "CC", "c.@g.c", "01011122211", 1880.3, "Energie");
+$man3 = new Manager(6, "BBB", "CCC", "ccc.@g.c", "01011133311", 1320.3, "Medecine");
+echo "Nombre de personnes créées : " . Personne::$counter . "\n";
 
-$user1 = new Utilisateur(1, "David", "DUPOND", "d.d@d.com", "061010101010", 1000, "dave", "123456", "Informatique", $profilMN);
-$user1->setLogin("dave")->setPassword("123456")->setService("Infomatique")->setProfil($profilMN);
-$user2 = new Utilisateur(2, "Paul", "DUPOND", "d.d@d.com", "061010101010", 10000, "polo", "123456", "Informatique", $profilDG);
-$user3 = new Utilisateur(3, "Omar", "DUPOND", "d.d@d.com", "061010101010", 100000, "omar", "123456", "Informatique", $profilCP);
+echo $dev1->afficher() . "\n";
 
-$developpeur = new Developpeur(1, "Omar", "DUPOND", "d.d@d.com", "061010101010", 1000, "FRONT-END");
-$developpeur1 = new Developpeur(2, "Karim", "DuSud", "d.d@d.com", "061010101010", 100000, "BACK-END");
-
-$manager = new Manager(1, "LeFou", "Mourad", "d.d@d.com", "061010101010", 100000, "Informatique");
-$manager1 = new Manager(2, "Kamel", "LaMenace", "d.d@d.com", "061010101010", 100000, "Informatique");
-
-
-// var_dump($user1);
-echo " Le développeur : " . $developpeur->getNom() . " " .  $developpeur->getPrenom() ." dont le mail est : ". $developpeur->getMail() ." et le num est : ". $developpeur->getTelephone() ." a un salaire de : ". $developpeur->calculerSalaire() ."."
- . " Il est spécialisé dans le " . $developpeur->getSpecialite();
- echo Personne::$counter;
-
-// echo $user2->calculerSalaire();
+$man1->afficher();

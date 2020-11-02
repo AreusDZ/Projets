@@ -7,9 +7,7 @@ abstract class Personne {
     protected $mail;
     protected $telephone;
     protected $salaire;
-    public static $counter;
-
-    
+    public static $counter = 0;
 
     public function __construct(int $id, string $prenom, string $nom, string $mail, 
                                 string $telephone, float $salaire){
@@ -19,11 +17,11 @@ abstract class Personne {
         $this->mail = $mail;
         $this->telephone = $telephone;
         $this->salaire = $salaire;
-        self::$counter++; 
+        self::$counter++;
     }
 
-    public abstract function calculerSalaire();
-    
+    public abstract function calculerSalaire() :float;
+
     public function affiche() : void {
         echo $this;
     }
