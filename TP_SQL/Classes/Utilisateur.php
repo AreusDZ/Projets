@@ -2,27 +2,12 @@
 
 class Utilisateur {
 
-    private $id;
+    private $id='Null';
     private $username;
     private $password;
     private $profil;
 
-    public function __construct(string $userName,string $password,string $profil)
-    {
-        $this->userName = $userName;
-        $this->password = $password;
-        $this->profil = $userName;
-    }
-
-    function addUser() 
-    {
-
-        $db = new mysqli('localhost','samir','samsgbd','afpa_test');
-        $res = $db -> query ("INSERT INTO utilisateur VALUES()" );
-        $db -> close();
-        return $res;
-
-    }
+    
     /**
      * Get the value of username
      */ 
@@ -58,7 +43,7 @@ class Utilisateur {
      */ 
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = password_hash($password,PASSWORD_DEFAULT);
 
         return $this;
     }
@@ -91,5 +76,10 @@ class Utilisateur {
         return $this->id;
     }
 
+    public function __toString() :string
+    {
+        return " [id] :" . $this->id . 
+        " [username] :" . $this->username . " [password] :" . $this->password. " [profil] :" . $this->profil;
+    }
 
 }

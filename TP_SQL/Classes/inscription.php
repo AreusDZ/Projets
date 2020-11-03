@@ -2,27 +2,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <div class="container-fluid" style="width : 50%">
-            <form>
+            <form action="traitement.php" method="POST">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control">
             </div>
-            <div class="form-group">
-            <label for="exampleFormControlSelect1">Type de profil</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            </select>
-        </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="add" class="btn btn-primary">Submit</button>
             </form>
     </div>
 
 </html>
+
+
