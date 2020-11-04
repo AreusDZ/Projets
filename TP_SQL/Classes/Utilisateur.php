@@ -2,7 +2,7 @@
 
 class Utilisateur {
 
-    private $id='Null';
+    private $id;
     private $username;
     private $password;
     private $profil;

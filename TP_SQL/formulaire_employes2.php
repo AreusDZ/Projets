@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+
+    if(!$_SESSION){
+        header('Location: classes/form_connexion.php');
+    }
+
+?>
+
 <html lang=fr>
 
     <head>
@@ -10,15 +19,15 @@
  
                 
                         // MODIFIER
-            if (isset($_GET["action"]) && $_GET["action"] == "modify" && isset($_GET['no_employe']) ) {
+            if (isset($_GET["action"]) && $_GET["action"] == "modify" && isset($_GET['no_emp']) ) {
 
-                $no_employe=$_GET['no_employe'];
+                $no_emp=$_GET['no_emp'];
                 
                 $db=mysqli_init();
-                mysqli_real_connect($db,'localhost','samir','samsgbd','employes_service');
-                $rs=mysqli_query($db,"SELECT * FROM employes WHERE no_employe= $no_employe " );
+                mysqli_real_connect($db,'localhost','samir','samsgbd','afpa_test');
+                $rs=mysqli_query($db,"SELECT * FROM employes WHERE no_emp= $no_emp " );
                 $data=mysqli_fetch_array($rs,MYSQLI_ASSOC);
-                $rm=mysqli_query($db,"UPDATE * FROM employes WHERE no_employe= $no_employe " );
+                $rm=mysqli_query($db,"UPDATE * FROM employes WHERE no_emp= $no_emp " );
                 mysqli_close($db);
                 $action="modify";
 
@@ -31,11 +40,11 @@
             <div class="row">
                 <div class="col-lg-5"></div>
                 <div class="col-lg-2">
-                    <form action="<?php  if ($action=="modify"){ ?>modif_employes.php?action=modify<?php }elseif($action=="ajout"){?>modif_employes.php?action=ajout<?php } ?>&no_employe=<?php if( $action== "modify"){echo $data['no_employe']; }?>" method="POST">  
-                        <!-- no_employes  -->
+                    <form action="<?php  if ($action=="modify"){ ?>modif_employes.php?action=modify<?php }elseif($action=="ajout"){?>modif_employes.php?action=ajout<?php } ?>&no_emp=<?php if( $action== "modify"){echo $data['no_emp']; }?>" method="POST">  
+                        <!-- no_emps  -->
                         <div class="form-group">
                             <label>numéro d'employé :</label>
-                            <input name="no_employe" type="text" value="<?php if( $action == "modify"){echo $data['no_employe'];}?>" class="form-control">
+                            <input name="no_emp" type="text" value="<?php if( $action == "modify"){echo $data['no_emp'];}?>" class="form-control">
                         </div>
                         <!-- prénom -->
                         <div class="form-group">
@@ -72,10 +81,10 @@
                             <label>Numéro de service :</label>
                             <input name="no_serv" type="text" min="1" max="7" value="<?php if( $action == "modify") {echo $data['no_serv'];}?>" class="form-control">
                         </div>
-                        <!-- no_sup -->
+                        <!-- sup -->
                         <div class="form-group">
                             <label>Numéro de supérieur :</label>
-                            <input name="no_sup" type="text" value="<?php if( $action == "modify") {echo $data['no_sup'];}?>" class="form-control">
+                            <input name="sup" type="text" value="<?php if( $action == "modify") {echo $data['sup'];}?>" class="form-control">
                         </div>
                         <input type="submit" class="btn btn-primary" value="Ajouter"/>
                     </form>

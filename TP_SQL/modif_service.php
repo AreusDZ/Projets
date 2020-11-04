@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+
+    if(!$_SESSION){
+        header('Location: classes/form_connexion.php');
+    }
+
+?>
+
 <html lang=fr>
 
     <head>
@@ -10,7 +19,6 @@
     <?php 
             include('crud_service.php');
             
-
                 //AJOUT
             if (isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
                 if (

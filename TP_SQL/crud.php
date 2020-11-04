@@ -5,7 +5,7 @@
     // FONCTION AJOUT
     function addEmployes($tableau) 
     {
-        $no_employe=$tableau['no_employe'];
+        $no_emp=$tableau['no_emp'];
         $nom=$tableau['nom']?$tableau['nom']:'NULL'; // Pour gérer le cas ou le post du nom est vide, on remplace par NULL
         $prenom=$tableau['prenom']?$tableau['prenom']:'NULL';
         $emploi=$tableau['emploi']?$tableau['emploi']:'NULL';
@@ -13,10 +13,10 @@
         $salaire=$tableau['salaire']?$tableau['salaire']:'NULL';
         $commission=$tableau['commission']?$tableau['commission']:'NULL';
         $no_serv=$tableau['no_serv'];
-        $no_sup=$tableau['no_sup']?$tableau['no_sup']:'NULL';
+        $sup=$tableau['sup']?$tableau['sup']:'NULL';
 
         $db=bddConnect();
-        $rs=mysqli_query($db,"INSERT INTO employes VALUES( $no_employe , '$nom' , '$prenom' , '$emploi' , '$embauche' , $salaire , $commission , $no_serv , $no_sup)" );
+        $rs=mysqli_query($db,"INSERT INTO employes VALUES( $no_emp , '$nom' , '$prenom' , '$emploi' , '$embauche' , $salaire , $commission , $no_serv , $sup)" );
         mysqli_close($db);
         return $rs;
 
@@ -26,10 +26,10 @@
     function deleteEmployes($tableau) 
     {
 
-        $no_employe = $tableau['no_employe'];
+        $no_emp = $tableau['no_emp'];
 
         $db=bddConnect();
-        $requete=mysqli_query($db,"DELETE FROM employes WHERE no_employe= $no_employe " );
+        $requete=mysqli_query($db,"DELETE FROM employes WHERE no_emp= $no_emp " );
         mysqli_close($db);
         return $requete;
     }
@@ -38,7 +38,7 @@
     function modifyEmployes($tableau) 
     {
 
-        $no_employe=$tableau['no_employe'];
+        $no_emp=$tableau['no_emp'];
         $nom=$tableau['nom']?$tableau['nom']:'NULL'; // Pour gérer le cas ou le post du nom est vide, on remplace par NULL
         $prenom=$tableau['prenom']?$tableau['prenom']:'NULL';
         $emploi=$tableau['emploi']?$tableau['emploi']:'NULL';
@@ -46,10 +46,10 @@
         $salaire=$tableau['salaire']?$tableau['salaire']:'NULL';
         $commission=$tableau['commission']?$tableau['commission']:'NULL';
         $no_serv=$tableau['no_serv'];
-        $no_sup=$tableau['no_sup']?$tableau['no_sup']:'NULL';
+        $sup=$tableau['sup']?$tableau['sup']:'NULL';
 
         $db=bddConnect();
-        $rm=mysqli_query($db,"UPDATE employes set nom='$nom',prenom='$prenom',emploi='$emploi',embauche='$embauche',salaire=$salaire,commission=$commission,no_serv=$no_serv,no_sup=$no_sup  WHERE no_employe= $no_employe " );
+        $rm=mysqli_query($db,"UPDATE employes set nom='$nom',prenom='$prenom',emploi='$emploi',embauche='$embauche',salaire=$salaire,commission=$commission,no_serv=$no_serv,sup=$sup  WHERE no_emp= $no_emp " );
         mysqli_close($db);
         return $rm;
     }

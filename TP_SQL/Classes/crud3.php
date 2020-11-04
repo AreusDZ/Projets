@@ -1,7 +1,7 @@
 <?php
-//vérifier que les infos ont été bien saisie
-//method pour insérer un utilisateur avec un mdp hashé
 
+// OUVERTURE D'UNE SESSION
+session_start();
 
 // FONCTION AJOUT
    include_once('Utilisateur.php');
@@ -10,7 +10,7 @@
         function addUser(String $username, String $password) 
         {
            
-            $utilisateur = 'Utilisateur';
+            $utilisateur = 'utilisateur';
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
             $db = connect();
@@ -38,23 +38,27 @@
             $selectRequest = $db->prepare("SELECT * FROM user WHERE username = ?");
             $selectRequest->bind_param("s", $username);
             $selectRequest->execute();
-            $rs   = $selectRequest->get_result();
-            $data = $rs->fetch_array(MYSQLI_ASSOC);
+            $rs=$selectRequest->get_result();
+            $data=$rs->fetch_array(MYSQLI_ASSOC);
     
-            //* Verify password
+            // Verify password
             $isPasswordCorrect = password_verify($password, $data['password']);
+
             if ($isPasswordCorrect) {
+                $_SESSION['username'] = $username;
+                $_SESSION['profil'] = $data['profil'];
 
-                echo "bienvenue vous etes connecté";
+                header('Location: ../modif_employes.php');
+                // print_r($_SESSION) ;
 
-            } else{
+                 }else{
                 
-                echo"non";
-            }
+                header('Location: form_connexion.php');
+             }
             
         }
 
-        // inscrition admin pas logique, enlever le select laisser que mail et password. plus besoin de profil, 
-        // directement user par défaut dans l'insert
-        // se renseigner sur password_verify, ça sera pour la connexion 
-        // page accueille pour soit connexion soit inscription
+      // fonction header pour rediriger un utilisateur vers une page (formulaire)
+      // header('location: adresse de la page')
+      // comme les session et les cookies, 
+      // elle doit etre appelé avant meme que du contenu ne soit affiché (balise html, include avec de l'affichage etc.)

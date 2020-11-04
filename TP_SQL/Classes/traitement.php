@@ -4,7 +4,8 @@
 
 
 
-   include_once('crud.php');
+
+   include_once('crud3.php');
    if (isset($_POST['add'])) {
     if (isset($_POST['email']) && !empty($_POST['email']) &&
         isset($_POST['password']) && !empty($_POST['password'])) {
@@ -21,5 +22,6 @@
 
             //CONNEXION VERIFY
             verify($_POST['emailLogin'], $_POST['passwordLogin']);
-
+          
+        
         }

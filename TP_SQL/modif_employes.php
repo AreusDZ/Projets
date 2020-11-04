@@ -1,4 +1,11 @@
+<?php 
+    session_start();
 
+    if(!$_SESSION ){
+        header('Location: classes/form_connexion.php');
+    }
+
+?>
 <html lang=fr>
 
     <head>
@@ -14,7 +21,7 @@
                 //AJOUT
             if (isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
                 if (
-                    isset($_POST["no_employe"]) && !empty($_POST["no_employe"]) &&
+                    isset($_POST["no_emp"]) && !empty($_POST["no_emp"]) &&
                     isset($_POST["no_serv"]) && !empty($_POST["no_serv"]) ) {
 
                     addEmployes($_POST);
@@ -23,7 +30,7 @@
                       }
 
                     //SUPPRIMER
-            }elseif (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['no_employe']) && empty($_POST)) {
+            }elseif (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['no_emp']) && empty($_POST)) {
                     
                     deleteEmployes( $_GET);
                    
@@ -39,7 +46,7 @@
                 
                     // générer les td du tableau HTML
                     $db=mysqli_init();
-                    mysqli_real_connect($db,'localhost','samir','samsgbd','employes_service');
+                    mysqli_real_connect($db,'localhost','samir','samsgbd','afpa_test');
                     $rq=mysqli_query($db,'SELECT * from employes');
                     $data=mysqli_fetch_all($rq,MYSQLI_ASSOC); 
                     mysqli_close($db);
@@ -49,7 +56,7 @@
                     function employeExist($num)  
                     {
                         $db=bddConnect();
-                        $r=mysqli_query($db,"SELECT * from employes as e INNER JOIN employes as e1 on e.no_employe=e1.no_sup  WHERE e.no_employe=$num ");
+                        $r=mysqli_query($db,"SELECT * from employes as e INNER JOIN employes as e1 on e.no_emp=e1.sup  WHERE e.no_emp=$num ");
                         $data=mysqli_fetch_all($r,MYSQLI_ASSOC); 
                         if(!empty($data)){
 
@@ -66,7 +73,7 @@
                 <table class="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th>no_employes</th>
+                            <th>no_emps</th>
                             <th>nom</th>
                             <th>prénom</th>
                             <th>emploi</th>
@@ -75,8 +82,9 @@
                             <th>commission</th>
                             <th>num service</th>
                             <th>num supérieur</th>
-                            <th>supprimer</th>
+                            <th>supprimer</th> 
                             <th>modifier</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -88,16 +96,26 @@
                                     }  
                             ?>
                                     <td>
-                                    <?php if(employeExist($value['no_employe'])==false){ ?><a href='modif_employes.php?action=delete&no_employe=<?php echo $value['no_employe']; ?>'> 
+                                    <?php if(employeExist($value['no_emp'])==false && $_SESSION['profil']=='administrateur'){ ?><a href='modif_employes.php?action=delete&no_emp=<?php echo $value['no_emp']; ?>'> 
                                     <button type='submit' class='btn btn-primary'>Supprimer</button><?php } ?>
                                     </a>
                                     </td>
 
                                     <td>
-                                    <a href='formulaire_employes2.php?action=modify&no_employe=<?php echo $value['no_employe'];?>'> 
+                                       <?php if($_SESSION['profil']=='administrateur') {?>
+                                    <a href='formulaire_employes2.php?action=modify&no_emp=<?php echo $value['no_emp'];?>'> 
                                     <button type='submit' class='btn btn-danger'>Modifier</button>
-                                    </a>
+                                    </a> <?php 
+                                       
+                                            }else{
+                                                
+                                            }
+                                         
+
+                                       ?>
                                     </td>
+                                      
+                                  
                         </tr>
                             <?php
                             } 

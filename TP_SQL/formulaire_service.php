@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+
+    if(!$_SESSION){
+        header('Location: classes/form_connexion.php');
+    }
+
+?>
+
 <html lang=fr>
 
     <head>
