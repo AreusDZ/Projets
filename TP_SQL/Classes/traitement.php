@@ -14,14 +14,16 @@
             $utilisateur->setUsername($_POST['email'])->setPassword($_POST['password']);
 
             // AJOUT   
-            addUser($_POST['email'],$_POST['password']);
+            $password=$_POST['password'];
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            addUser($_POST['email'], $passwordHash );
 
         }
 
     } elseif(isset($_POST['connect'])) {
 
             //CONNEXION VERIFY
-            verify($_POST['emailLogin'], $_POST['passwordLogin']);
+            ConnectUser($_POST['emailLogin'], $_POST['passwordLogin']);
           
         
         }

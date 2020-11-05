@@ -3,6 +3,9 @@
 // OUVERTURE D'UNE SESSION
 session_start();
 
+include('../connect.php');
+
+
 // FONCTION AJOUT
    include_once('Utilisateur.php');
 
@@ -10,42 +13,42 @@ session_start();
         function addUser(String $username, String $password) 
         {
            
-            $utilisateur = 'utilisateur';
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            $utilisateur = 'utilisateur'; // forcer la valeur 'utilisateur' comme profil
+           
 
-            $db = connect();
+            $db = bddConnect();
             $stmt = $db -> prepare ("INSERT INTO user VALUES(NULL,?,?,?)" );
-            $stmt->bind_param("sss",$username,$passwordHash,$utilisateur);
+            $stmt->bind_param("sss",$username,$password,$utilisateur);
             $stmt->execute();
             $res=$stmt->get_result();
-            $query="INSERT INTO user VALUES('$username','$passwordHash','$utilisateur')";
+            $query="INSERT INTO user VALUES('$username','$password','$utilisateur')";
             echo $query;
             $db -> close();
             return $res;
 
          }
 
-// FONCTION CONNECT
-        function connect()
-        {
-            $db = new mysqli('localhost','samir','samsgbd','afpa_test');
-            return $db;
-        }
+
 // FONCTION VERIFY
-        function verify(String $username,String $password)
+        function verify(String $username)
         {
-            $db = connect();
+            $db = bddConnect();
             $selectRequest = $db->prepare("SELECT * FROM user WHERE username = ?");
             $selectRequest->bind_param("s", $username);
             $selectRequest->execute();
             $rs=$selectRequest->get_result();
             $data=$rs->fetch_array(MYSQLI_ASSOC);
+
+            return $data;
+        }
     
-            // Verify password
+        function ConnectUser(String $username, String $password) 
+        {
+            $data = verify($username);     // Verify password
             $isPasswordCorrect = password_verify($password, $data['password']);
 
             if ($isPasswordCorrect) {
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $data['username'];
                 $_SESSION['profil'] = $data['profil'];
 
                 header('Location: ../modif_employes.php');
@@ -53,7 +56,7 @@ session_start();
 
                  }else{
                 
-                header('Location: form_connexion.php');
+                header('Location: form_connexion.php');  // dans le traitement après l'appel à la fonction
              }
             
         }

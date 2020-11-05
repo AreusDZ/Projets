@@ -18,53 +18,51 @@
   
     <?php 
                 include('crud.php');
+                include_once('classes/Employe.php');
+                
                 //AJOUT
-            if (isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
-                if (
-                    isset($_POST["no_emp"]) && !empty($_POST["no_emp"]) &&
+            if ($_SESSION['profil']=='administrateur' && isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
+                if ( isset($_POST["no_emp"]) && !empty($_POST["no_emp"]) &&
                     isset($_POST["no_serv"]) && !empty($_POST["no_serv"]) ) {
 
-                    addEmployes($_POST);
+                    $employe = new Employe();
+                    $employe->setNoEmploye($_POST["no_emp"])->setNom($_POST["nom"])->setPrenom($_POST["prenom"])->setEmploi($_POST["emploi"])
+                    ->setEmbauche($_POST["embauche"])->setSalaire($_POST["salaire"])->setCommission($_POST["commission"])->setNoServ($_POST["no_serv"])
+                    ->setNoSup($_POST["sup"]);
+                        
+                    addEmployes($employe);
                    
                     
                       }
 
                     //SUPPRIMER
-            }elseif (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['no_emp']) && empty($_POST)) {
+            }elseif ($_SESSION['profil']=='administrateur' && isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['no_emp']) && empty($_POST)) {
                     
                     deleteEmployes( $_GET);
                    
 
                     //Modifier
-                }elseif (isset($_GET["action"]) && $_GET["action"] == "modify" && !empty($_POST) ) {
+                }elseif ($_SESSION['profil']=='administrateur' && isset($_GET["action"]) && $_GET["action"] == "modify" && !empty($_POST) ) {
 
-                    modifyEmployes($_POST);
+                    $employe = new Employe();
+                    $employe->setNoEmploye($_POST["no_emp"])->setNom($_POST["nom"])->setPrenom($_POST["prenom"])->setEmploi($_POST["emploi"])
+                    ->setEmbauche($_POST["embauche"])->setSalaire($_POST["salaire"])->setCommission($_POST["commission"])->setNoServ($_POST["no_serv"])
+                    ->setNoSup($_POST["sup"]);
+
+                    modifyEmployes($employe);
                
 
                 }
            
-                
-                    // générer les td du tableau HTML
-                    $db=mysqli_init();
-                    mysqli_real_connect($db,'localhost','samir','samsgbd','afpa_test');
-                    $rq=mysqli_query($db,'SELECT * from employes');
-                    $data=mysqli_fetch_all($rq,MYSQLI_ASSOC); 
-                    mysqli_close($db);
-
-
-                     // FONCTION POUR QUE LE BOUTTON SUPPRIMER N'APPARAISSE QUE QUAND LE SERVICE EST VIDE
-                    function employeExist($num)  
-                    {
-                        $db=bddConnect();
-                        $r=mysqli_query($db,"SELECT * from employes as e INNER JOIN employes as e1 on e.no_emp=e1.sup  WHERE e.no_emp=$num ");
-                        $data=mysqli_fetch_all($r,MYSQLI_ASSOC); 
-                        if(!empty($data)){
-
-                             return true;
-                        }
+                // générer le tableau
+               $data= generateTab();
                   
-                        
-                    }  
+
+
+                     
+                   
+
+                
     ?>
         
     <div class="container-fluid">
@@ -78,12 +76,36 @@
                             <th>prénom</th>
                             <th>emploi</th>
                             <th>embauche</th>
+                            <?php 
+                            
+                                if($_SESSION['profil']=='administrateur') {
+                                
+                            ?>
                             <th>salaire</th>
                             <th>commission</th>
+                                <?php 
+                                
+                                    }else{
+
+                                    }
+                                
+                                ?>
                             <th>num service</th>
                             <th>num supérieur</th>
+                            <?php 
+                            
+                            if($_SESSION['profil']=='administrateur') {
+                            
+                        ?>
                             <th>supprimer</th> 
                             <th>modifier</th>
+                              <?php 
+                                
+                                    }else{
+
+                                    }
+                                
+                                ?>
                            
                         </tr>
                     </thead>
@@ -91,9 +113,18 @@
                         <tr>
                             <?php
                                 foreach ($data as $key => $value) {
-                                    foreach ($value as $v) {
-                                        echo "<td>$v</td>";
-                                    }  
+                                    foreach ($value as $k => $v) {
+                                      if($_SESSION['profil']=='utilisateur' && !($k=='salaire' || $k=='commission')){
+
+                                           echo "<td>$v</td>";
+
+                                      }elseif($_SESSION['profil']=='administrateur'){
+                                            echo "<td>$v</td>";
+                                      }
+                                       
+                                       
+                                    }
+                                     
                             ?>
                                     <td>
                                     <?php if(employeExist($value['no_emp'])==false && $_SESSION['profil']=='administrateur'){ ?><a href='modif_employes.php?action=delete&no_emp=<?php echo $value['no_emp']; ?>'> 

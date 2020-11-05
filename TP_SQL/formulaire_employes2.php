@@ -64,7 +64,7 @@
                         <!-- embauche -->
                         <div class="form-group">
                             <label>date d'embauche :</label>
-                            <input name="embauche" type="date" value="<?php if( $action == "modify") {echo $data['embauche'];}?>" class="form-control">
+                            <input name="embauche" type="text" value="<?php if( $action == "modify") {echo $data['embauche'];}?>" class="form-control">
                         </div>
                         <!-- salaire -->
                         <div class="form-group">

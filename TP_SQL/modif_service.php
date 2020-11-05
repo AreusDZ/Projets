@@ -18,50 +18,41 @@
 
     <?php 
             include('crud_service.php');
+            include_once('classes/Service.php');
             
                 //AJOUT
             if (isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
                 if (
-                    isset($_POST["no_serv"]) && !empty($_POST["no_serv"]) ) {
+                    isset($_POST["noserv"]) && !empty($_POST["noserv"]) ) {
 
-                        addService($_POST);
+                        $service = new Service();
+                        $service->setNoServ($_POST["noserv"])->setVille($_POST["ville"])->setService($_POST["service"]);
+                        
+                        addService($service);
 
                     }
 
                     //SUPPRIMER
-            }elseif (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['no_serv']) && empty($_POST)) {
+            }elseif (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['noserv']) && empty($_POST)) {
                  
-                    deleteService($_GET);
+                    
+                    deleteService($_GET['noserv']);
 
                     //Modifier
                 }elseif (isset($_GET["action"]) && $_GET["action"] == "modify" && !empty($_POST) ) {
 
+                    $service = new Service();
+                    $service->setNoServ($_POST["noserv"])->setVille($_POST["ville"])->setService($_POST["service"]);
                     modifyService($_POST);
 
                 }
            
                
-                    // générer les td du tableau HTML
-                    $db=mysqli_init();
-                    mysqli_real_connect($db,'localhost','samir','samsgbd','employes_service');
-                    $rq=mysqli_query($db,'SELECT * from service');
-                    $data=mysqli_fetch_all($rq,MYSQLI_ASSOC); 
-                    mysqli_close($db); 
+                  // générer le tableau
+                    $data= generateTab();
                     
 
-                    // FONCTION POUR QUE LE BOUTTON SUPPRIMER N'APPARAISSE QUE QUAND LE SERVICE EST VIDE
-                    function serviceExist($num)  
-                    {
-                        $db=bddConnect();
-                        $r=mysqli_query($db,"SELECT * from employes as e INNER JOIN service as s on e.no_serv=s.no_serv  WHERE e.no_serv=$num ");
-                        $data=mysqli_fetch_all($r,MYSQLI_ASSOC); 
-                        if(!empty($data)){
-
-                             return true;
-                        }
                   
-                        
-                    }  
     ?>
         
     <div class="container-fluid">
@@ -70,7 +61,7 @@
                 <table class="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th>no_serv</th>
+                            <th>noserv</th>
                             <th>service</th>
                             <th>ville</th>
                             <th>supprimer</th>
@@ -86,13 +77,13 @@
                                     }  
                             ?>
                                     <td>
-                                    <?php if(serviceExist($value['no_serv'])==false){ ?><a href='modif_service.php?action=delete&no_serv=<?php echo $value['no_serv']; ?>'>
+                                    <?php if(serviceExist($value['noserv'])==false){ ?><a href='modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
                                     <button type='submit' class='btn btn-primary'>Supprimer</button><?php }?> 
                                     </a>
                                     </td>
 
                                     <td>
-                                    <a href='formulaire_service.php?action=modify&no_serv=<?php echo $value['no_serv'];?>'> 
+                                    <a href='formulaire_service.php?action=modify&noserv=<?php echo $value['noserv'];?>'> 
                                     <button type='submit' class='btn btn-danger'>Modifier</button>
                                     </a>
                                     </td>

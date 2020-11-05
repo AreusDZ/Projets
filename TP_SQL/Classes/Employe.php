@@ -47,7 +47,7 @@ class Employe {
         $this->emploi = $newEmploi;
         return $this;
     }
-    public function getEmbauche() : int{
+    public function getEmbauche() : string{ // passer le format en dateTime dans la classe employe et gérer le format exact avec l'option format
         return $this->embauche;
     }
 

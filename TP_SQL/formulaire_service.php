@@ -19,15 +19,15 @@
  
                 
                         // MODIFIER
-            if (isset($_GET["action"]) && $_GET["action"] == "modify" && isset($_GET['no_serv']) ) {
+            if (isset($_GET["action"]) && $_GET["action"] == "modify" && isset($_GET['noserv']) ) {
 
-                $no_serv=$_GET['no_serv'];
+                $noserv=$_GET['noserv'];
                 
                 $db=mysqli_init();
-                mysqli_real_connect($db,'localhost','samir','samsgbd','employes_service');
-                $rs=mysqli_query($db,"SELECT * FROM service2 WHERE no_serv= $no_serv " );
+                mysqli_real_connect($db,'localhost','samir','samsgbd','afpa_test');
+                $rs=mysqli_query($db,"SELECT * FROM service WHERE noserv= $noserv " );
                 $data=mysqli_fetch_array($rs,MYSQLI_ASSOC);
-                $rm=mysqli_query($db,"UPDATE * FROM service2 WHERE no_serv= $no_serv " );
+                $rm=mysqli_query($db,"UPDATE * FROM service WHERE noserv= $noserv " );
                 mysqli_close($db);
                 $action="modify";
 
@@ -40,11 +40,11 @@
             <div class="row">
                 <div class="col-lg-5"></div>
                 <div class="col-lg-2">
-                    <form action="<?php  if ($action=="modify"){ ?>modif_service.php?action=modify<?php }elseif($action=="ajout"){?>modif_service.php?action=ajout<?php } ?>&no_serv=<?php if( $action== "modify"){echo $data['no_serv']; }?>" method="POST">  
-                        <!-- no_serv  -->
+                    <form action="<?php  if ($action=="modify"){ ?>modif_service.php?action=modify<?php }elseif($action=="ajout"){?>modif_service.php?action=ajout<?php } ?>&noserv=<?php if( $action== "modify"){echo $data['noserv']; }?>" method="POST">  
+                        <!-- noserv  -->
                         <div class="form-group">
                             <label>Numéro de service :</label>
-                            <input name="no_serv" type="text" value="<?php if( $action == "modify"){echo $data['no_serv'];}?>" class="form-control">
+                            <input name="noserv" type="text" value="<?php if( $action == "modify"){echo $data['noserv'];}?>" class="form-control">
                         </div>
                         <!-- service -->
                         <div class="form-group">
