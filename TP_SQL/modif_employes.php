@@ -38,7 +38,7 @@
                     //SUPPRIMER
             }elseif ($_SESSION['profil']=='administrateur' && isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['no_emp']) && empty($_POST)) {
                     
-                    deleteEmployes( $_GET);
+                    deleteEmployes( $_GET['no_emp']);
                    
 
                     //Modifier
@@ -155,7 +155,12 @@
                     </tbody>
                 </table>
             </div>
-            <input type="submit" class="btn btn-primary" onclick="window.location.href='formulaire_employes2.php'" value="+ Ajouter" />
+            <div>
+                <input type="submit" class="btn btn-primary" onclick="window.location.href='formulaire_employes2.php'" value="+ Ajouter" />
+            </div>
+            <div style="margin-left: 5px;">
+                <a class="btn btn-danger w-30" href="classes/disConnect.php">Déconnexion</a>
+            </div>
         </div>
     </div>
 </html>

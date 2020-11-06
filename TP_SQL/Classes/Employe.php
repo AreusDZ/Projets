@@ -51,7 +51,7 @@ class Employe {
         return $this->embauche;
     }
 
-    public function setEmbauche(int $newEmbauche): self{
+    public function setEmbauche(string $newEmbauche): self{
         $this->embauche = $newEmbauche;
         return $this;
     }

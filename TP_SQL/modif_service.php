@@ -94,8 +94,14 @@
                             ?>
                     </tbody>
                 </table>
+                
             </div>
-            <input type="submit" class="btn btn-primary" onclick="window.location.href='formulaire_service.php'" value="+ Ajouter" />
+            <div>
+                <input type="submit" class="btn btn-primary" onclick="window.location.href='formulaire_service.php'" value="+ Ajouter" />
+            </div>
+            <div style="margin-left: 5px;">
+                <a class="btn btn-danger w-30" href="classes/disConnect.php">Déconnexion</a>
+            </div>
         </div>
     </div>
 </html>

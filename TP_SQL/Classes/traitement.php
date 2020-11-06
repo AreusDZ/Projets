@@ -1,9 +1,7 @@
+
 <?php
 //vérifier que les infos ont été bien saisie
 //method pour insérer un utilisateur avec un mdp hashé
-
-
-
 
    include_once('crud3.php');
    if (isset($_POST['add'])) {
@@ -17,7 +15,8 @@
             $password=$_POST['password'];
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             addUser($_POST['email'], $passwordHash );
-
+            
+            header('Location: form_connexion.php'); 
         }
 
     } elseif(isset($_POST['connect'])) {

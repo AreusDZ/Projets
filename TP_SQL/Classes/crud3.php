@@ -51,7 +51,7 @@ include('../connect.php');
                 $_SESSION['username'] = $data['username'];
                 $_SESSION['profil'] = $data['profil'];
 
-                header('Location: ../modif_employes.php');
+                header('Location: navig.php');
                 // print_r($_SESSION) ;
 
                  }else{
@@ -61,7 +61,6 @@ include('../connect.php');
             
         }
 
-      // fonction header pour rediriger un utilisateur vers une page (formulaire)
-      // header('location: adresse de la page')
-      // comme les session et les cookies, 
-      // elle doit etre appelé avant meme que du contenu ne soit affiché (balise html, include avec de l'affichage etc.)
+
+
+        

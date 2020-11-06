@@ -43,10 +43,10 @@
     }
 
     // FONCTION SUPPRESSION
-    function deleteEmployes($tableau) 
+    function deleteEmployes($no_emp) 
     {
 
-        $no_emp = $tableau['no_emp'];
+       
 
         $db=bddConnect();
         $stmt = $db -> prepare ("DELETE FROM employes WHERE no_emp= ? " );
