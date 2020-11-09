@@ -17,7 +17,7 @@
 
 
     <?php 
-            include('crud_service.php');
+            include('DAO/ServiceMysqliDAO.php');
             include_once('classes/Service.php');
             
                 //AJOUT
@@ -28,7 +28,7 @@
                         $service = new Service();
                         $service->setNoServ($_POST["noserv"])->setVille($_POST["ville"])->setService($_POST["service"]);
                         
-                        addService($service);
+                        ServiceMysqliDAO::addService($service);
 
                     }
 
@@ -36,20 +36,20 @@
             }elseif (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['noserv']) && empty($_POST)) {
                  
                     
-                    deleteService($_GET['noserv']);
+                        ServiceMysqliDAO::deleteService($_GET['noserv']);
 
                     //Modifier
                 }elseif (isset($_GET["action"]) && $_GET["action"] == "modify" && !empty($_POST) ) {
 
-                    $service = new Service();
-                    $service->setNoServ($_POST["noserv"])->setVille($_POST["ville"])->setService($_POST["service"]);
-                    modifyService($service);
+                        $service = new Service();
+                        $service->setNoServ($_POST["noserv"])->setVille($_POST["ville"])->setService($_POST["service"]);
+                        ServiceMysqliDAO::modifyService($service);
 
                 }
            
                
                   // générer le tableau
-                    $data= generateTab();
+                        $data= ServiceMysqliDAO::generateTab();
                     
 
                   
@@ -77,7 +77,7 @@
                                     }  
                             ?>
                                     <td>
-                                    <?php if(serviceExist($value['noserv'])==false){ ?><a href='modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
+                                    <?php if(ServiceMysqliDAO::serviceExist($value['noserv'])==false){ ?><a href='modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
                                     <button type='submit' class='btn btn-primary'>Supprimer</button><?php }?> 
                                     </a>
                                     </td>
