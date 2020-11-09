@@ -3,14 +3,15 @@
 // OUVERTURE D'UNE SESSION
 session_start();
 
-include('../DAO/connect.php');
+include('connect.php');
 
 
 // FONCTION AJOUT
-   include_once('Utilisateur.php');
+   include_once('classes/Utilisateur.php');
 
-     
-        function addUser(String $username, String $password) 
+    class userMysqliDAO {
+
+        public static function addUser(String $username, String $password) 
         {
            
             $utilisateur = 'utilisateur'; // forcer la valeur 'utilisateur' comme profil
@@ -30,7 +31,7 @@ include('../DAO/connect.php');
 
 
 // FONCTION VERIFY
-        function verify(String $username)
+            public static function search(String $username)
         {
             $db = bddConnect();
             $selectRequest = $db->prepare("SELECT * FROM user WHERE username = ?");
@@ -42,25 +43,25 @@ include('../DAO/connect.php');
             return $data;
         }
     
-        function ConnectUser(String $username, String $password) 
-        {
-            $data = verify($username);     // Verify password
-            $isPasswordCorrect = password_verify($password, $data['password']);
+        // public static function ConnectUser(String $username, String $password) 
+        // {
+        //     $data = userMysqliDAO::search($username);     // Verify password
+        //     $isPasswordCorrect = password_verify($password, $data['password']);
 
-            if ($isPasswordCorrect) {
-                $_SESSION['username'] = $data['username'];
-                $_SESSION['profil'] = $data['profil'];
+        //     if ($isPasswordCorrect) {
+        //         $_SESSION['username'] = $data['username'];
+        //         $_SESSION['profil'] = $data['profil'];
 
-                header('Location: navig.php');
-                // print_r($_SESSION) ;
+        //         header('Location: navig.php');
+        //         // print_r($_SESSION) ;
 
-                 }else{
+        //          }else{
                 
-                header('Location: form_connexion.php');  // dans le traitement après l'appel à la fonction
-             }
+        //         header('Location: form_connexion.php');  // dans le traitement après l'appel à la fonction
+        //      }
             
-        }
+        // }
 
-
+}
 
         

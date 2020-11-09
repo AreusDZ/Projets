@@ -19,16 +19,15 @@
     <?php 
             include('DAO/ServiceMysqliDAO.php');
             include_once('classes/Service.php');
+            include('service/serviceService.php');
+
             
                 //AJOUT
             if (isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
                 if (
                     isset($_POST["noserv"]) && !empty($_POST["noserv"]) ) {
 
-                        $service = new Service();
-                        $service->setNoServ($_POST["noserv"])->setVille($_POST["ville"])->setService($_POST["service"]);
-                        
-                        ServiceMysqliDAO::addService($service);
+                       serviceService::add($_POST["noserv"],$_POST["ville"],$_POST["service"]);  // appelle la fonction de la couche service dans le fichier serviceService.php
 
                     }
 
@@ -36,20 +35,18 @@
             }elseif (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['noserv']) && empty($_POST)) {
                  
                     
-                        ServiceMysqliDAO::deleteService($_GET['noserv']);
+                    serviceService::delete($_GET['noserv']);
 
                     //Modifier
-                }elseif (isset($_GET["action"]) && $_GET["action"] == "modify" && !empty($_POST) ) {
+            }elseif (isset($_GET["action"]) && $_GET["action"] == "modify" && !empty($_POST) ) {
 
-                        $service = new Service();
-                        $service->setNoServ($_POST["noserv"])->setVille($_POST["ville"])->setService($_POST["service"]);
-                        ServiceMysqliDAO::modifyService($service);
+                    serviceService::modify($_POST["noserv"],$_POST["ville"],$_POST["service"]);
 
                 }
            
                
                   // générer le tableau
-                        $data= ServiceMysqliDAO::generateTab();
+                        $data = serviceService::tabGenerate();
                     
 
                   

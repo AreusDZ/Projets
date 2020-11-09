@@ -3,6 +3,7 @@
 
     <div  class="container" style="width : 50%; padding:5%; background-color: green; margin-top:5%;">
     <h2 style="text-align: center;">Connexion</h2>
+    
             <form action="traitement.php" method="POST">
             <div class="form-group">
                 <label for="email">Email</label>

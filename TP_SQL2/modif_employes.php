@@ -19,43 +19,37 @@
     <?php 
                 include('DAO/EmployeMysqliDAO.php');
                 include_once('classes/Employe.php');
+                include('service/serviceEmploye.php');
+
                 
                 //AJOUT
             if ($_SESSION['profil']=='administrateur' && isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
                 if ( isset($_POST["no_emp"]) && !empty($_POST["no_emp"]) &&
                     isset($_POST["no_serv"]) && !empty($_POST["no_serv"]) ) {
 
-                    $employe = new Employe();
-                    $employe->setNoEmploye($_POST["no_emp"])->setNom($_POST["nom"])->setPrenom($_POST["prenom"])->setEmploi($_POST["emploi"])
-                    ->setEmbauche($_POST["embauche"])->setSalaire($_POST["salaire"])->setCommission($_POST["commission"])->setNoServ($_POST["no_serv"])
-                    ->setNoSup($_POST["sup"]);
-                        
-                    EmployeMysqliDAO::addEmployes($employe);
                    
+                        serviceEmploye::add($_POST["no_emp"],$_POST["nom"],$_POST["prenom"],$_POST["emploi"],$_POST["embauche"],$_POST["salaire"],$_POST["commission"],$_POST["no_serv"],$_POST["sup"]);// appelle la fonction de la couche service dans le fichier serviceEmploye.php
                     
                       }
 
                     //SUPPRIMER
             }elseif ($_SESSION['profil']=='administrateur' && isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET['no_emp']) && empty($_POST)) {
                     
-                    EmployeMysqliDAO::deleteEmployes( $_GET['no_emp']);
+                    serviceEmploye::delete( $_GET['no_emp']);
                    
 
                     //Modifier
             }elseif ($_SESSION['profil']=='administrateur' && isset($_GET["action"]) && $_GET["action"] == "modify" && !empty($_POST) ) {
 
-                    $employe = new Employe();
-                    $employe->setNoEmploye($_POST["no_emp"])->setNom($_POST["nom"])->setPrenom($_POST["prenom"])->setEmploi($_POST["emploi"])
-                    ->setEmbauche($_POST["embauche"])->setSalaire($_POST["salaire"])->setCommission($_POST["commission"])->setNoServ($_POST["no_serv"])
-                    ->setNoSup($_POST["sup"]);
+                  
 
-                    EmployeMysqliDAO::modifyEmployes($employe);
+                    serviceEmploye::modify($_POST["no_emp"],$_POST["nom"],$_POST["prenom"],$_POST["emploi"],$_POST["embauche"],$_POST["salaire"],$_POST["commission"],$_POST["no_serv"],$_POST["sup"]);
                
 
                 }
            
                 // générer le tableau
-                    $data = EmployeMysqliDAO::generateTab();
+                    $data =  serviceEmploye::tabGenerate();
                   
 
 

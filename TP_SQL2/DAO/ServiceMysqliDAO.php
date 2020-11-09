@@ -4,7 +4,7 @@
 class ServiceMysqliDAO {
 
 // générer le tableau
-   public function generateTab()
+   public static function generateTab()
 
     { 
        $db=bddConnect();
