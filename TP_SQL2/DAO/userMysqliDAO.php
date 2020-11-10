@@ -7,13 +7,14 @@ include('connect.php');
 
 
 // FONCTION AJOUT
-   include_once('classes/Utilisateur.php');
+   include_once('../Classes/Utilisateur.php');
 
     class userMysqliDAO {
 
         public static function addUser(String $username, String $password) 
         {
            
+
             $utilisateur = 'utilisateur'; // forcer la valeur 'utilisateur' comme profil
            
 

@@ -2,7 +2,7 @@
     session_start();
 
     if(!$_SESSION){
-        header('Location: classes/form_connexion.php');
+        header('Location: form_connexion.php');
     }
 
 ?>
@@ -40,7 +40,7 @@
             <div class="row">
                 <div class="col-lg-5"></div>
                 <div class="col-lg-2">
-                    <form action="<?php  if ($action=="modify"){ ?>modif_employes.php?action=modify<?php }elseif($action=="ajout"){?>modif_employes.php?action=ajout<?php } ?>&no_emp=<?php if( $action== "modify"){echo $data['no_emp']; }?>" method="POST">  
+                    <form action="<?php  if ($action=="modify"){ ?>controleurs/modif_employes.php?action=modify<?php }elseif($action=="ajout"){?>controleurs/modif_employes.php?action=ajout<?php } ?>&no_emp=<?php if( $action== "modify"){echo $data['no_emp']; }?>" method="POST">  
                         <!-- no_emps  -->
                         <div class="form-group">
                             <label>numéro d'employé :</label>

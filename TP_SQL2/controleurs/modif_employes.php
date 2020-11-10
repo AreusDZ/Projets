@@ -2,7 +2,7 @@
     session_start();
 
     if(!$_SESSION ){
-        header('Location: classes/form_connexion.php');
+        header('Location: ../classes/form_connexion.php');
     }
 
 ?>
@@ -17,9 +17,9 @@
 
   
     <?php 
-                include('DAO/EmployeMysqliDAO.php');
-                include_once('classes/Employe.php');
-                include('service/serviceEmploye.php');
+                include('../DAO/EmployeMysqliDAO.php');
+                include_once('../classes/Employe.php');
+                include('../service/serviceEmploye.php');
 
                 
                 //AJOUT
@@ -121,14 +121,14 @@
                                      
                             ?>
                                     <td>
-                                    <?php if(EmployeMysqliDAO::employeExist($value['no_emp'])==false && $_SESSION['profil']=='administrateur'){ ?><a href='modif_employes.php?action=delete&no_emp=<?php echo $value['no_emp']; ?>'> 
+                                    <?php if(EmployeMysqliDAO::employeExist($value['no_emp'])==false && $_SESSION['profil']=='administrateur'){ ?><a href='../modif_employes.php?action=delete&no_emp=<?php echo $value['no_emp']; ?>'> 
                                     <button type='submit' class='btn btn-primary'>Supprimer</button><?php } ?>
                                     </a>
                                     </td>
 
                                     <td>
                                        <?php if($_SESSION['profil']=='administrateur') {?>
-                                    <a href='formulaire_employes2.php?action=modify&no_emp=<?php echo $value['no_emp'];?>'> 
+                                    <a href='../formulaire_employes2.php?action=modify&no_emp=<?php echo $value['no_emp'];?>'> 
                                     <button type='submit' class='btn btn-danger'>Modifier</button>
                                     </a> <?php 
                                        
@@ -150,10 +150,10 @@
                 </table>
             </div>
             <div>
-                <input type="submit" class="btn btn-primary" onclick="window.location.href='formulaire_employes2.php'" value="+ Ajouter" />
+                <input type="submit" class="btn btn-primary" onclick="window.location.href='../formulaire_employes2.php'" value="+ Ajouter" />
             </div>
             <div style="margin-left: 5px;">
-                <a class="btn btn-danger w-30" href="classes/disConnect.php">Déconnexion</a>
+                <a class="btn btn-danger w-30" href="../classes/disConnect.php">Déconnexion</a>
             </div>
         </div>
     </div>

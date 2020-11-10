@@ -2,7 +2,7 @@
     session_start();
 
     if(!$_SESSION){
-        header('Location: classes/form_connexion.php');
+        header('Location: ../classes/form_connexion.php');
     }
 
 ?>
@@ -17,9 +17,9 @@
 
 
     <?php 
-            include('DAO/ServiceMysqliDAO.php');
-            include_once('classes/Service.php');
-            include('service/serviceService.php');
+            include('../DAO/ServiceMysqliDAO.php');
+            include_once('../classes/Service.php');
+            include('../service/serviceService.php');
 
             
                 //AJOUT
@@ -74,13 +74,13 @@
                                     }  
                             ?>
                                     <td>
-                                    <?php if(ServiceMysqliDAO::serviceExist($value['noserv'])==false){ ?><a href='modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
+                                    <?php if(ServiceMysqliDAO::serviceExist($value['noserv'])==false){ ?><a href='../modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
                                     <button type='submit' class='btn btn-primary'>Supprimer</button><?php }?> 
                                     </a>
                                     </td>
 
                                     <td>
-                                    <a href='formulaire_service.php?action=modify&noserv=<?php echo $value['noserv'];?>'> 
+                                    <a href='../formulaire_service.php?action=modify&noserv=<?php echo $value['noserv'];?>'> 
                                     <button type='submit' class='btn btn-danger'>Modifier</button>
                                     </a>
                                     </td>
@@ -94,7 +94,7 @@
                 
             </div>
             <div>
-                <input type="submit" class="btn btn-primary" onclick="window.location.href='formulaire_service.php'" value="+ Ajouter" />
+                <input type="submit" class="btn btn-primary" onclick="window.location.href='../formulaire_service.php'" value="+ Ajouter" />
             </div>
             <div style="margin-left: 5px;">
                 <a class="btn btn-danger w-30" href="classes/disConnect.php">Déconnexion</a>
