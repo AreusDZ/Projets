@@ -20,7 +20,7 @@
             include('../DAO/ServiceMysqliDAO.php');
             include_once('../classes/Service.php');
             include('../service/serviceService.php');
-
+            include('../presentation/tableau_service.php');
             
                 //AJOUT
             if (isset($_GET["action"]) && $_GET["action"] == "ajout" && !empty($_POST)) {
@@ -45,60 +45,12 @@
                 }
            
                
-                  // générer le tableau
+                // générer le tableau
                         $data = serviceService::tabGenerate();
                     
-
-                  
+                // appelle de l'affichage
+                        tableau($data); 
     ?>
         
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <table class="table table-striped table-dark">
-                    <thead>
-                        <tr>
-                            <th>noserv</th>
-                            <th>service</th>
-                            <th>ville</th>
-                            <th>supprimer</th>
-                            <th>modifier</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php
-                                foreach ($data as $key => $value) {
-                                    foreach ($value as $v) {
-                                        echo "<td>$v</td>";
-                                    }  
-                            ?>
-                                    <td>
-                                    <?php if(ServiceMysqliDAO::serviceExist($value['noserv'])==false){ ?><a href='../modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
-                                    <button type='submit' class='btn btn-primary'>Supprimer</button><?php }?> 
-                                    </a>
-                                    </td>
-
-                                    <td>
-                                    <a href='../formulaire_service.php?action=modify&noserv=<?php echo $value['noserv'];?>'> 
-                                    <button type='submit' class='btn btn-danger'>Modifier</button>
-                                    </a>
-                                    </td>
-                        </tr>
-                            <?php
-                            } 
-                            
-                            ?>
-                    </tbody>
-                </table>
-                
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary" onclick="window.location.href='../formulaire_service.php'" value="+ Ajouter" />
-            </div>
-            <div style="margin-left: 5px;">
-                <a class="btn btn-danger w-30" href="classes/disConnect.php">Déconnexion</a>
-            </div>
-        </div>
-    </div>
+       
 </html>
