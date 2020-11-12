@@ -5,15 +5,15 @@
     <div class="container" style="background-color: green; margin-top:10%; border-radius:5px;">
                 <div class="row p-5 w-100" style="text-align: center;">
                     <div class="col-6 col-md-6 m-auto">
-                        <a class="btn btn-success w-50" href="controleurs/modif_employes.php">Employés</a>
+                        <a class="btn btn-success w-50" href="../controleurs/modif_employes.php">Employés</a>
                     </div>
                     <div class="col-6 col-md-6 m-auto">
-                        <a class="btn btn-success w-50" href="controleurs/modif_service.php">Services</a>
+                        <a class="btn btn-success w-50" href="../controleurs/modif_service.php">Services</a>
                     </div>
                 </div>
                 <div style="text-align: center; padding-bottom:10px;">
                     
-                <a class="btn btn-danger w-30" href="disConnect.php">Déconnexion</a>
+                <a class="btn btn-danger w-30" href="DAO/disConnect.php">Déconnexion</a>
 
                 </div>
     </div>

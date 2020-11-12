@@ -5,13 +5,14 @@
 
    include_once('../DAO/userMysqliDAO.php');
    include('../service/serviceUser.php');
+   include('../presentation/userPresentation.php');
    
    if (isset($_POST['add'])) {
     if (isset($_POST['email']) && !empty($_POST['email']) &&
         isset($_POST['password']) && !empty($_POST['password'])) {
 
             serviceUser::add($_POST['email'],$_POST['password']);
-            header('Location: ../form_connexion.php'); 
+            formConnexion();
         }
 
     } elseif(isset($_POST['connect'])) {
@@ -30,14 +31,14 @@
                     $_SESSION['username'] = $data['username'];
                     $_SESSION['profil'] = $data['profil'];
     
-                    header('Location: ../navig.php');
+                    navig();
                     // print_r($_SESSION) ;
                 }
                 
 
                  }else{
                 
-                header('Location: ../form_connexion.php');  // dans le traitement après l'appel à la fonction
+               formConnexion(); // dans le traitement après l'appel à la fonction
              }
             
        
