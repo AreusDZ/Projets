@@ -3,7 +3,7 @@ class ParentMysqliDao {
     
     public static function connect (){
 
-        $db = new mysqli('localhost','perrine.leguai','Mysql2020','gestion_employes');
+        $db = new mysqli('localhost','samir','samsgbd','afpa_test');
         
         return $db;
     }

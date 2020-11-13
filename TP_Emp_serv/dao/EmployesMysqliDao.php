@@ -20,7 +20,7 @@ class EmployesMysqliDao extends ParentMysqliDao {
         $db=parent :: connect();
         
         // on insère les nouvelles données
-        $stmt=$db->prepare("INSERT INTO emp values (?,?,?,?,?,?,?,?,?)") ;
+        $stmt=$db->prepare("INSERT INTO employes values (?,?,?,?,?,?,?,?,?)") ;
         $stmt->bind_param('isssisddi', $a, $b,$c, $d, $e, $f, $g, $h, $i);
         $rs=$stmt->execute();
         
@@ -34,7 +34,7 @@ class EmployesMysqliDao extends ParentMysqliDao {
         $db=parent :: connect();
         
         // on supprime les données
-        $stmt=$db->prepare("DELETE FROM emp WHERE noemp=?");
+        $stmt=$db->prepare("DELETE FROM employes WHERE no_emp=?");
         $stmt->bind_param('i', $a);
         $stmt->execute();
         $rs=$stmt->get_result();
@@ -59,7 +59,7 @@ class EmployesMysqliDao extends ParentMysqliDao {
         $db=parent :: connect();
         
         // mise à jour des données
-        $stmt=$db->prepare("UPDATE emp SET nom=?, prenom=?, emploi=?, sup=?, embauche=?, sal=?, comm=?, noserv=? WHERE noemp=?");
+        $stmt=$db->prepare("UPDATE employes SET nom=?, prenom=?, emploi=?, sup=?, embauche=?, sal=?, comm=?, noserv=? WHERE no_emp=?");
         $stmt->bind_param('sssisddii',$b,$c, $d, $e, $f, $g, $h, $i, $a);
         $rs=$stmt->execute();
 
@@ -74,7 +74,7 @@ class EmployesMysqliDao extends ParentMysqliDao {
         $db= parent :: connect();
 
         //récupère toute les données de la table emp
-        $stmt=$db->prepare("SELECT * FROM emp");
+        $stmt=$db->prepare("SELECT * FROM employes");
         $stmt->execute();
         $rs=$stmt->get_result();
         $data = $rs->fetch_all(MYSQLI_ASSOC);
@@ -90,7 +90,7 @@ class EmployesMysqliDao extends ParentMysqliDao {
         $db= parent :: connect();
 
         //récupère les données d'un employé précisé
-        $stmt=$db->prepare("SELECT * FROM emp WHERE noemp=?");
+        $stmt=$db->prepare("SELECT * FROM employes WHERE no_emp=?");
         $stmt->bind_param('i',$a);
         $stmt->execute();
         $rs=$stmt->get_result();
@@ -108,7 +108,7 @@ class EmployesMysqliDao extends ParentMysqliDao {
         $db= parent :: connect();
         
         //sélectionne les employés qui ont des subalternes
-        $stmt=$db->prepare("SELECT DISTINCT noemp FROM `emp` WHERE noemp IN(SELECT DISTINCT sup FROM emp)");
+        $stmt=$db->prepare("SELECT DISTINCT no_emp FROM `employes` WHERE noemp IN(SELECT DISTINCT sup FROM employes)");
         $stmt->execute();
         $rs=$stmt->get_result();
         $donnees=$rs->fetch_all(MYSQLI_ASSOC);
