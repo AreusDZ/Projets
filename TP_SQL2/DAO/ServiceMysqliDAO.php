@@ -12,7 +12,17 @@ class ServiceMysqliDAO {
        $stmt->execute();
        $rs=$stmt->get_result();
        $data = $rs->fetch_all(MYSQLI_ASSOC);
-       return $data;
+       $newTab= array();
+        foreach ($data as $value) {
+            $service = new service();
+            $service -> setNoServ($value['noserv']) -> setService($value['service']) -> setVille($value['ville']);
+            array_push($newTab,$service);
+        }
+        return $newTab;
+
+        
+
+      
    }
 
     // FONCTION AJOUT
@@ -76,7 +86,8 @@ class ServiceMysqliDAO {
       $stmt = $db -> prepare("SELECT * from employes as e INNER JOIN service as s on e.no_serv=s.noserv  WHERE e.no_serv=$num ");
       $stmt->execute();
       $rm=$stmt->get_result();
-      $data=mysqli_fetch_all($rm,MYSQLI_ASSOC); 
+      $data=$rm->fetch_all(MYSQLI_ASSOC); 
+     
       if(!empty($data)){
 
            return true;

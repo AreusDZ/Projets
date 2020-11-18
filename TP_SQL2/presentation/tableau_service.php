@@ -30,19 +30,21 @@
                     <tbody>
                         <tr>
                             <?php
-                                foreach ($data as $key => $value) {
-                                    foreach ($value as $v) {
-                                        echo "<td>$v</td>";
-                                    }  
+                                foreach ($data as $value) {
+                                   
+                                        echo "<td>".$value->getNoserv()."</td>"; // pareil pour les autres 
+                                        echo "<td>".$value->getService()."</td>";
+                                        echo "<td>".$value->getVille()."</td>";
+                                        
                             ?>
                                     <td>
-                                    <?php if(ServiceMysqliDAO::serviceExist($value['noserv'])==false){ ?><a href='../controleurs/modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
+                                    <?php if(ServiceMysqliDAO::serviceExist($value->getNoserv())==false){ ?><a href='../controleurs/modif_service.php?action=delete&noserv=<?php echo $value['noserv']; ?>'>
                                     <button type='submit' class='btn btn-primary'>Supprimer</button><?php }?> 
                                     </a>
                                     </td>
 
                                     <td>
-                                    <a href='../formulaire_service.php?action=modify&noserv=<?php echo $value['noserv'];?>'> 
+                                    <a href='../formulaire_service.php?action=modify&noserv=<?php echo $value->getNoserv();?>'> 
                                     <button type='submit' class='btn btn-danger'>Modifier</button>
                                     </a>
                                     </td>
