@@ -5,7 +5,8 @@
 // Création de l'élement div 
 function createInsertDiv(i,parent){
     var div = document.createElement("div");
-        div.id = i;          
+        div.id = i;  
+        div.style.display ="none";
         parent.appendChild(div);
         return div;
 }
@@ -53,11 +54,19 @@ var bouton = document.getElementById("btn_afficher");
     bouton.addEventListener('click', function (e){
         
         var div = document.getElementById("divTP1");
-        if (div.style.display === "none") {
-            div.style.display = "block";
+        if (div.style.display !== "none") {
+            
+            bouton.value = "afficher";
+            div.style.display = "none";
 
-         } else {
-          div.style.display = "none";
+         } 
+         
+         else if(div.style.display == "none") {
+
+            bouton.value = "masquer";
+            div.style.display = "block";
+            
+         
              }
     })
 
