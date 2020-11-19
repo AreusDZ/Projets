@@ -51,19 +51,24 @@ for(var i = 0; i < tds.length; i++){
 
 
 
-// var tdList = document.querySelectorAll('td');
-// var input = document.createElement('input'); input.id = 'modifTable';
+// let tdList = document.querySelectorAll('td');
+// let input = document.createElement('input'); input.id = 'modifTable';
 
-// for (i = 0; i < tdList.length; i++) {
-//     tdList[i].addEventListener('click', function(e){
-//         var test = e.target;
-//         var tdContent = test.innerText;
-//         test.replaceWith(input);
-//         document.getElementById("modifTable").value = tdContent;
+// window.addEventListener('load', function() {
+//     for (i = 0; i < tdList.length; i++) {
+//         tdList[i].addEventListener('click', function change(e){
+//             var test = e.target;
+//             var tdContent = test.innerText;
+//             this.replaceWith(input);
+//             document.getElementById("modifTable").value = tdContent;
 
-//         document.getElementById("modifTable").addEventListener('focusout', function(e){
-//             e.preventDefault();
-//             this.replaceWith(this.value);
+//             document.getElementById("modifTable").addEventListener('focusout', function(e){
+//                 e.preventDefault();
+//                 var td = document.createElement('td');
+//                 this.replaceWith(td);
+//                 td.innerText = this.value;
+//                 td.addEventListener('click', change);
+//             });
 //         });
-//     });
-// }
+//     }
+// });
